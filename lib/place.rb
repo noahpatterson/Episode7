@@ -1,13 +1,14 @@
 require_relative "./map"
 
 class Place
-  attr_accessor :name, :coordinates
+  attr_accessor :address, :coordinates, :name
 
-  def self.build(name)
-    results = Map.search(name)
+  def self.build(address, options= {})
+    results = Map.search(address)
     Place.new.tap do |p|
-      p.name = name
+      p.address = address
       p.coordinates = results.coordinates
+      p.name = options[:name].nil? ? address : options[:name]
     end
   end
 

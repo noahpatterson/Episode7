@@ -1,3 +1,4 @@
+require_relative "spec_helper"
 require_relative "../lib/calculates_route"
 require_relative "../lib/place"
 

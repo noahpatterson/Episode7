@@ -1,3 +1,4 @@
+require_relative "spec_helper"
 require_relative "../lib/map"
 require 'geocoder'
 
@@ -10,8 +11,8 @@ describe Map do
     end
 
     it "should use the first item in the array" do
-      austin = stub("Austin")
-      dallas = stub("Dallas")
+      austin = double("Austin")
+      dallas = double("Dallas")
       Geocoder.stub(:search) {[austin, dallas]}
       Map.search("austin, tx").should eq(austin)
     end
@@ -19,8 +20,8 @@ describe Map do
 
   describe ":distance" do
     it "should calculate distance between two sets of coordinates" do
-      alpha = stub
-      beta = stub
+      alpha = double
+      beta = double
       Geocoder::Calculations.should_receive(:distance_between).with(alpha, beta)
       Map.distance_between(alpha, beta)
     end
