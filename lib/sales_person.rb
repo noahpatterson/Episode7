@@ -21,8 +21,8 @@ class SalesPerson
     route.map {|leg| leg.fetch(:distance)}.reduce(:+)
   end
 
-  def calculate_traveling_time(total_miles)
-    total_miles/55
+  def calculate_traveling_time(total_miles, speed = 55)
+    total_miles/speed
   end
 
   private

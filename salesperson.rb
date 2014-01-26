@@ -45,10 +45,11 @@ def pretty_time(seconds)
 end
 
 route = personal_route(phil)
+puts route
 puts "This is my personal route: #{route.map {|leg| leg.fetch(:point).name}}"
 miles = phil.calculate_total_miles(route)
 puts "Phil traveled #{miles} miles"
-time = phil.calculate_traveling_time(miles)*60*60
+time = phil.calculate_traveling_time(miles, 25)*60*60
 puts "It took phil #{pretty_time(time)}"
 # puts "This is the benchmark for 2 cities:\n#{Benchmark(2)}"
 # puts "This is the benchmark for 10 cities:\n#{Benchmark(10)}"
