@@ -1,13 +1,13 @@
 class CalculatesRoute
 
   def self.calculate(points)
-
     remaining_points = points
     route = []
-    route << remaining_points.slice!(0)
+    route << {point: remaining_points.slice!(0), distance: 0}
     until remaining_points == [] do 
-      next_point = shortest_distance(route.last, remaining_points)
-      route << remaining_points.slice!(remaining_points.index(next_point))
+      next_point = shortest_distance(route.last.fetch(:point), remaining_points)
+      remaining_points.delete(next_point.fetch(:point))
+      route << next_point
     end
     route
   end
@@ -16,7 +16,8 @@ class CalculatesRoute
     distances = possible.map do |point|
       {point: point, distance: Map.distance_between(from, point)}
     end
-    distances.sort{|a,b| a.fetch(:distance) <=> b.fetch(:distance)}.first.fetch(:point)
+    sorted = distances.sort{|a,b| a.fetch(:distance) <=> b.fetch(:distance)}
+    sorted.first
   end
 end
 

@@ -17,6 +17,14 @@ class SalesPerson
     CalculatesRoute.calculate(cities)
   end
 
+  def calculate_total_miles(route)
+    route.map {|leg| leg.fetch(:distance)}.reduce(:+)
+  end
+
+  def calculate_traveling_time(total_miles)
+    total_miles/55
+  end
+
   private
 
   def find_starting_point(starting_point_name)
